@@ -1,9 +1,9 @@
 
 @csrf
 <div class="form-group">
-    <label for="titulo">Título</label>
-    <input type="text" class="form-control" value="{{old('name',$article->title)}}" name="name" id="title" placeholder="Título">
-    @error('title')
+    <label for="name">Título</label>
+    <input type="text" class="form-control" value="{{old('name',$article->title)}}" name="name" id="name" placeholder="Título">
+    @error('name')
         <small class="text-danger">{{$message}}</small>
     @enderror
 </div>
@@ -20,7 +20,7 @@
 <div class="form-group">
     <label for="description">description</label>
     <textarea class="form-control" name="description" id="description" rows="3" placeholder="Descripción">{{old('description',$article->description)}}</textarea>
-    @error('content')
+    @error('description')
         <small class="text-danger">{{$message}}</small>
     @enderror
 </div>
