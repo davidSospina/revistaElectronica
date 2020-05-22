@@ -10,6 +10,12 @@ use App\Http\Requests\StoreArticlePost;
 
 class ArticleController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index','show']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +23,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::orderBy('name', 'desc')->paginate(5);
+        $articles = Article::orderBy('name', 'asc')->paginate(5);
         return view('dashboard.article.index', ['articles'=>$articles]);
     }
 
@@ -41,15 +47,16 @@ class ArticleController extends Controller
      */
     public function store(StoreArticlePost $request)
     {
+        /*
         Article::create($request->validated());
         return back()->with('status', 'El artículo se ha registrado con éxito.');
-
-        /*
+        */
+        
         $article = new Article;
 
         $article->name = $request->name;
         $article->category_id = $request->category_id;
-        $article->desription = $request->desription;
+        $article->description = $request->description;
         $article->review_date = $request->review_date;
         $article->state = $request->state;
         $article->author_id = $request->author_id;
@@ -58,10 +65,10 @@ class ArticleController extends Controller
         $article->archive_pdf = $pathPdf;
 
         if ($article->save()) {
-            return redirect()->route('dashboard.article.create')->with('status', 'El artículo se ha registrado con éxito.');
+            return redirect()->route('article.index')->with('status', 'El artículo se ha registrado con éxito.');
         }
-        return redirect()->route('dashboard.article.create')->with('status', 'No es posible registrar el artículo.');
-        */
+        return redirect()->route('article.index')->with('status', 'No es posible registrar el artículo.');
+        
     }
 
     /**
@@ -72,7 +79,9 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        return view('dashboard.article.show', ["article"=>$article]);
+        $categories = Category::pluck('id','title');
+        $users = User::pluck('id','name');
+        return view('dashboard.article.show', ["article"=>$article, "users"=>$users, "categories"=>$categories]);
     }
 
     /**
@@ -84,7 +93,8 @@ class ArticleController extends Controller
     public function edit(Article $article)
     {
         $categories = Category::pluck('id','title');
-        return view('dashboard.article.edit', ["article"=>$article,  'categories' => $categories]);
+        $users = User::pluck('id','name');
+        return view('dashboard.article.edit', ['article'=>$article,  'users'=>$users, 'categories' => $categories]);
     }
 
     /**

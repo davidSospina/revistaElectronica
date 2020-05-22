@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('document_type',['identification_card', 'passport']);
+            $table->enum('document_type',['identification_card', 'passport'])->default('identification_card');
             $table->string('document_number')->unique();
             $table->string('email')->unique();
             $table->string('username')->unique();

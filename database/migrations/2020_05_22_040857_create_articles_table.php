@@ -13,16 +13,19 @@ class CreateArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->String('name',200);
-            $table->bigInteger('category_id');
-            $table->text('description',200);
-            $table->datetime('review_date');
+        Schema::create('articulos', function (Blueprint $table) {
+            $table->id();
+            $table->String('name');
+            $table->unsignedBigInteger('category_id');
+            $table->string('description');
+            $table->date('review_date');
             $table->enum('state', ['publish', 'review', 'rejected'])->default('review');
-            $table->integer('author_id');
+            $table->unsignedBigInteger('author_id');
             $table->String('archive_pdf');
             $table->timestamps();
+
+            $table->foreign('author_id')->references('id')->on('users');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
@@ -33,6 +36,6 @@ class CreateArticlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('articulos');
     }
 }

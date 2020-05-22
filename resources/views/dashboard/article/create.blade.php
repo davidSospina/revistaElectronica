@@ -10,7 +10,7 @@
 
     <form action="{{ route('article.store') }}" method="POST" enctype="multipart/form-data">
         @include('dashboard.article._form')
-        <a class="btn btn-info" href="{{route('article.index')}}">Cancelar</a>
+        <a class="btn btn-info" href="{{route('article.index')}}">Regresar</a>
     </form>
 
 @endsection

@@ -51,8 +51,12 @@
             </td>
             <td>
                 <a class="btn btn-sm btn-info" href="{{route('article.show', $article->id)}}">Ver</a>
-                <a class="btn btn-sm btn-warning" href="{{route('article.edit', $article->id)}}">Editar</a>
-                <button data-toggle="modal" data-target="#eliminarModal" data-id="{{$article->id}}" class="btn btn-sm btn-danger" type="button">Eliminar</button>
+
+                @if ($article->author_id == auth()->user()->id)
+                    <a class="btn btn-sm btn-warning" href="{{route('article.edit', $article->id)}}">Editar</a>
+                    <button data-toggle="modal" data-target="#eliminarModal" data-id="{{$article->id}}" class="btn btn-sm btn-danger" type="button">Eliminar</button>
+                @endif
+                    
             </td>
         </tr>
         @endforeach

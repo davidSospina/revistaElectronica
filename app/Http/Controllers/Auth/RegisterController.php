@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -29,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = 'dashboard';
 
     /**
      * Create a new controller instance.
@@ -51,7 +52,12 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'document_type' => ['required'],
+            'document_number' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'username' => ['required'],
+            'birthday_date' => ['required'],
+            'photo' => ['required'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -62,12 +68,20 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create(Request $data)
     {
+        $pathPhoto = $data->file('photo')->move('images', time().$data->photo->getClientOriginalName());
+
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'name' => request('name'),
+            'document_type' => request('document_type'),
+            'document_number' => request('document_number'),
+            'email' => request('email'),
+            'username' => request('username'),
+            'birthday_date' => request('birthday_date'),
+            'photo' => $pathPhoto,
+            'password' => Hash::make(request('password')),
         ]);
+
     }
 }
