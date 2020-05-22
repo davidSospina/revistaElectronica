@@ -10,7 +10,7 @@
 
     @include("dashboard.partials.validation-error")
 
-    <form action="{{ route('article.update', $article->id) }}" method="POST">
+    <form action="{{ route('article.update', $article->id) }}" method="POST" enctype="multipart/form-data">
         @method('PUT')
         @include('dashboard.article._form')
         <a class="btn btn-info" href="{{route('article.index')}}">Regresar</a>

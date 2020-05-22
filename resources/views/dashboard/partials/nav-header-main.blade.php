@@ -12,6 +12,12 @@
           <li class="nav-item mr-sm-2">
             <a class="nav-link" href="{{route('category.index')}}">Categorías<span class="sr-only"></span></a>
           </li>
+          <li>
+            <form class="form-inline">
+              <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+          </li>
         </ul>
       @else
       @endauth
@@ -24,7 +30,7 @@
         @auth
           <li class="nav-item dropdown">
               <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                  {{ Auth::user()->name }} <span class="caret"></span>
+                  {{ Auth::user()->username }} <span class="caret"></span>
               </a>
 
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

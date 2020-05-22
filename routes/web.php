@@ -23,5 +23,7 @@ Route::resource('dashboard/article','ArticleController');
 
 Route::resource('dashboard/category','CategoryController');
 
+Route::resource('dashboard/user','UserController');
+
 Route::view('dashboard/bienvenida', 'dashboard.bienvenida')->name('bienvenida');
 Route::get('dashboard/bienvenida', 'HomeController@index')->name('dashboard');

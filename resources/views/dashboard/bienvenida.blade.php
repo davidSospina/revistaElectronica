@@ -13,6 +13,7 @@
 
           <a class="btn btn-primary mt-3 mb-3" href="{{route('article.index')}}">Artículos</a> <br>
           <a class="btn btn-primary mt-3 mb-3" href="{{route('category.index')}}">Categorías</a>
+          <a class="btn btn-primary mt-3 mb-3" href="{{route('user.show', Auth::user())}}">Información personal</a>
         </div>
     </div>
 
