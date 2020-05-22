@@ -24,7 +24,9 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::orderBy('name', 'asc')->paginate(5);
-        return view('dashboard.article.index', ['articles'=>$articles]);
+        $categories = Category::pluck('id','title');
+        $users = User::pluck('id','name');
+        return view('dashboard.article.index', ['articles'=>$articles, 'categories' => $categories, 'users' => $users]);
     }
 
     /**

@@ -44,13 +44,40 @@
                         {{$article->name}}
                     </td>
                     <td>
-                        {{$article->category_id}}
+                        @if ($article->category_id  == 1)
+                           {{"Desarrollo"}} 
+                        @else
+                            @if ($article->category_id  == 2)
+                                {{"Fotografia"}} 
+                            @else
+                                @if ($article->category_id  == 3)
+                                    {{"Investigación"}} 
+                                @else
+                                    @if ($article->category_id  == 4)
+                                        {{"Internet de las cosas"}}
+                                    @else
+                                        @if ($article->category_id  == 5)
+                                            {{"Cultura general"}}
+                                        @else
+                                            @if ($article->category_id  == 6)
+                                                {{"Inteligencia artificial"}} 
+                                            @else
+                                            @endif
+                                        @endif
+                                    @endif
+                                @endif
+                            @endif
+                        @endif
                     </td>
                     <td>
                         {{$article->state}}
                     </td>
                     <td>
-                        {{$article->author_id}}
+                        @if ($article->author_id == 1)
+                            {{"David Salgado Ospina"}}
+                        @else
+                            {{"Luisa Morales"}}
+                        @endif
                     </td>
                     <td>
                         <a class="btn btn-sm btn-info" href="{{route('article.show', $article->id)}}">Ver</a>
@@ -76,13 +103,40 @@
                             {{$article->name}}
                         </td>
                         <td>
-                            {{$article->category_id}}
+                            @if ($article->category_id  == 1)
+                                {{"Desarrollo"}} 
+                                @else
+                                    @if ($article->category_id  == 2)
+                                        {{"Fotografia"}} 
+                                    @else
+                                        @if ($article->category_id  == 3)
+                                            {{"Investigación"}} 
+                                        @else
+                                            @if ($article->category_id  == 4)
+                                                {{"Internet de las cosas"}}
+                                            @else
+                                                @if ($article->category_id  == 5)
+                                                    {{"Cultura general"}}
+                                                @else
+                                                    @if ($article->category_id  == 6)
+                                                        {{"Inteligencia artificial"}} 
+                                                    @else
+                                                    @endif
+                                                @endif
+                                            @endif
+                                        @endif
+                                    @endif
+                                @endif
                         </td>
                         <td>
                             {{$article->state}}
                         </td>
                         <td>
-                            {{$article->author_id}}
+                            @if ($article->author_id == 1)
+                            {{"David Salgado Ospina"}}
+                        @else
+                            {{"Luisa Morales"}}
+                        @endif
                         </td>
                         <td>
                             <a class="btn btn-sm btn-info" href="{{route('article.show', $article->id)}}">Ver</a>
@@ -96,10 +150,10 @@
                         </td>
                     </tr>
                 @else
-                    <p class="text-center">No hay artículos con estado 'Publicado'.</p>
+                    
                 @endif
             @endforeach
-        @endif
+        @endauth
         
     </tbody>
 </table>
